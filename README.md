@@ -26,4 +26,4 @@ mv -n "$f" "emission_$(date -r "$f" +"%Y%m%d_%H%M%S").csv"
 
 ### Do I need code review to upload the logs?
 
-No. Just upload the logs with the Github UI or Git and open a pull request. These uploads will be approved periodically. Also you can ask for write permission if you don't have it yet.
+No. Just upload the logs with the Github UI or Git and open a pull request. These uploads will be merged periodically. Also you can ask for write permission if you don't have it yet.
