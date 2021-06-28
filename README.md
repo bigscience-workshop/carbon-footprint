@@ -12,7 +12,7 @@ If you are not using `huggingface/transformers`, you should integrate `codecarbo
 1. Create a folder named with your WG in the root of this repo (e.g., `carbon-footprint-wg`). [Example](https://github.com/bigscience-workshop/carbon-footprint/tree/master/carbon-footprint-wg)
 2. Create subfolders (e.g., `prompt-enginerring`, `architecture-proof-of-concept`).
 3. Run the experiments and find your `emission.csv` file saved together with the model.
-4. Upload the logs into the subfolders. Make sure they are `.csv` file. Ykafeiou can rename `emission.csv` to any name you like.
+4. Upload the logs into the subfolders. Make sure they are `.csv` file. You can rename `emission.csv` to any name you like.
 5. Done! Have a coffee! ☕
 
 ## Useful Commands
