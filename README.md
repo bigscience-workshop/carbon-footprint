@@ -15,6 +15,13 @@ If you are not using `huggingface/transformers`, you should integrate `codecarbo
 4. Upload the logs into the subfolders. Make sure they are `.csv` file. Ykafeiou can rename `emission.csv` to any name you like.
 5. Done! Have a coffee! ☕
 
+## Useful Commands
+### Rename `emission.csv` to a unique file name with its timestamp
+```bash
+export f=emission.csv
+mv -n "$f" "emission_$(date -r "$f" +"%Y%m%d_%H%M%S").csv"
+```
+
 ## FAQ
 
 ### Do I need code review to upload the logs?
