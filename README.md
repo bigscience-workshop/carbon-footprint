@@ -27,3 +27,6 @@ mv -n "$f" "emission_$(date -r "$f" +"%Y%m%d_%H%M%S").csv"
 ### Do I need code review to upload the logs?
 
 No. Just upload the logs with the Github UI or Git, then open a pull request. These uploads will be merged periodically. Alternatively, you can ask for write permission if you don't have it yet.
+
+### What if I come across some problems tracking the experiments?
+We are here to help! Open an issue or seek help from carbon footprint WG Slack channel!
