@@ -1,5 +1,5 @@
-#!/bin/python3
-"""Script used to print useful metrics from runs"""
+#!/usr/bin/env python
+"""Retrieve user runs on JZ and print metrics in human or machine readable format"""
 
 # Orginal script
 from doctest import FAIL_FAST
@@ -71,28 +71,32 @@ def split_alloctres(alloctres):
 
 
 show_headers = not ('-n' in sys.argv[1:] or '--noheader' in sys.argv[1:])
-args = ['sacct'] + sys.argv[1:] + ['--format=jobid,elapsed,nodelist,alloctres,partition,qos,start,end,group', '-P', '-X', '-n']
+args = ['sacct'] + sys.argv[1:] + ['--format=jobid,elapsed,nodelist,alloctres,partition,qos,start,end,group,jobname,workdir', '-P', '-X', '-n']
 
 p = subprocess.run(' '.join(args), shell=True, encoding='utf8',
                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 if show_headers:
     # Print human-readable output
-    fmt_string = '{0:<9} {1:<9} {2:<9} {3:<9} {4:<9} {5:<9} {6:<9} {7:<9} {8:<9} {9:<9} {10:<10} {11:<19} {12:<19}'
-    print(fmt_string.format('JobID', 'V100 32GB', 'V100 16GB', 'A100 40GB', 'CPUs', 'RAM', 'Energy', 'Partition', 'Group', 'Elapsed', 'QoS', 'Start', 'End'))
-    print(('-' * 9 + ' ') * 10 + ('-' * 10 + ' ') + ('-' * 19 + ' ') * 2)
+    fmt_string = '{0:<9} {1:<9} {2:<9} {3:<9} {4:<9} {5:<9} {6:<9} {7:<9} {8:<9} {9:<9} {10:<10} {11:<10} {12:<19} {13:<19} {14:<19}'
+    print(fmt_string.format('JobID', 'V100 32GB', 'V100 16GB', 'A100 40GB', 'CPUs', 'RAM', 'Energy', 'Partition', 'Group', 'Elapsed', 'QoS', 'JobName', 'Start', 'End', 'Workdir'))
+    print(('-' * 9 + ' ') * 10 + ('-' * 10 + ' ') * 2 + ('-' * 19 + ' ') * 2 + ('-' * 40 + ' '))
 
 else:
     # Machine readable output
-    fmt_string = '{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}'
+    fmt_string = '{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}'
 
 for j in p.stdout.splitlines():
-    job_id, elapsed, nodelist, alloctres, partition, qos, start, end, group = j.split(
+    job_id, elapsed, nodelist, alloctres, partition, qos, start, end, group, jobname, workdir = j.split(
         '|')
 
     num_gpus_per_types = find_num_gpus_per_types(nodelist, alloctres)
 
     alloc = split_alloctres(alloctres)
+
+    for field in ['cpu', 'mem', 'energy']:
+        if field not in alloc:
+            alloc[field] = 'N/A'
 
     print(
         fmt_string.format(job_id,
@@ -106,5 +110,7 @@ for j in p.stdout.splitlines():
                           group,
                           elapsed,
                           qos,
+                          jobname,
                           start,
-                          end))
+                          end,
+                          workdir))
