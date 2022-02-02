@@ -64,6 +64,8 @@ def split_alloctres(alloctres):
     line_splitted = [i.split('=') for i in alloctres.split(',')]
     d = {}
     for pair in line_splitted:
+        if len(pair) < 2:
+                    continue
         key = pair[0]
         value = pair[1]
         d[key] = (value)
