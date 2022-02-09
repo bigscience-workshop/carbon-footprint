@@ -1,0 +1,106 @@
+/* Large desktop Styles */
+@media only screen and (min-width: 1281px) {
+
+    body {
+        background-image: url("stripes_sym2.png");
+    }
+
+    .fullPage {
+        width: 1280px;
+        margin: 0 auto;
+    }
+
+    /*
+    ---------------------------------- INPUT FORM ----------------------------------------
+    */
+
+    .short-input  {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .short-input label {
+        width: 50%;
+        margin-bottom: 0;
+    }
+
+    .short-input .box-runtime {
+        display:block;
+        width: 50%;
+    }
+
+    .short-input .box-runtime input:first-of-type {
+        margin-right:0;
+        margin-bottom:2px;
+
+    }
+
+    .box-runtime input:last-of-type {
+        margin-left:0;
+    }
+
+    .short-input > input[type='number'],
+    .short-input .box-fields {
+        width: 50%;
+    }
+
+    #div_memory label{
+        width: 47%;
+        margin-right: 3%;
+    }
+
+    /*
+    ---------------------------------- MINI-BOX ----------------------------------------
+    */
+
+    /*.mini-box:not(:last-of-type)  {*/
+    /*    margin-right: 12px;*/
+    /*}*/
+
+    /*.mini-box {*/
+    /*    flex-direction: column;*/
+    /*    height: 260px;*/
+    /*    width:calc((25%) - (9px));*/
+    /*}*/
+
+
+    .mini-box:nth-of-type(n+3) {
+        height: 240px;
+    }
+
+    /*
+    ---------------------------------- FIRST OUTPUT ----------------------------------------
+    */
+
+    /*.two-graphs-box {*/
+    /*    flex-grow: 1;*/
+    /*}*/
+
+    .one-of-two-graphs {
+        width: calc((50%) - (10px));
+    }
+
+    .one-of-two-graphs:first-of-type {
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .one-of-two-graphs:last-of-type {
+        padding-right: 0;
+        padding-left: 0;
+        /*margin-bottom: 0;*/
+    }
+
+    .pie-graph {
+        margin-top: 100px;
+    }
+
+    /*
+    ---------------------------------- FOOTER ----------------------------------------
+    */
+
+    .data-questions .container {
+        flex-grow:1;
+    }
+
+}

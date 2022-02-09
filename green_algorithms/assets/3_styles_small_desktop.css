@@ -1,0 +1,171 @@
+/* Small desktop Styles */
+@media only screen and (min-width: 1001px) {
+
+    html {
+      font-size: 62.5%;
+    }
+
+    .fullPage {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    /*
+    ---------------------------------- INPUT FORM ----------------------------------------
+    */
+
+    .input-form {
+        margin-right: 12px;
+        width: calc((33.3%) - (6px));
+    }
+
+    /*
+    ---------------------------------- MINI-BOX ----------------------------------------
+    */
+
+    /*.mini-box:nth-of-type(2n) {*/
+    /*    margin-right: 12px;*/
+    /*}*/
+
+    /*.mini-box {*/
+    /*    height: 180px;*/
+    /*    width:calc((50%) - (6px));*/
+    /*}*/
+
+    /*.mini-box:first-of-type {*/
+    /*    margin-right: 0;*/
+    /*    width: 100%;*/
+    /*}*/
+
+    .caption-icons p:first-of-type {
+        font-size: 22px;
+        font-size: 2.2rem;
+    }
+
+    .mini-box {
+        margin-right: 12px;
+        height: 170px;
+    }
+
+    .mini-box:nth-of-type(2), .mini-box:nth-of-type(5) {
+        margin-right: 0;
+    }
+
+    .mini-box:nth-of-type(-n+2) {
+        width: calc((50%) - (6px));
+    }
+
+    .mini-box:nth-of-type(n+3) {
+        width: calc((33%) - (8px));
+        flex-direction: column;
+        height: 260px;
+    }
+
+
+
+
+
+    /*
+    ---------------------------------- FIRST OUTPUT ----------------------------------------
+    */
+
+    .first-output {
+        width:calc((66.6%) - (6px));
+    }
+
+    .two-graphs-box {
+        flex-grow: 1;
+    }
+
+    /*.one-of-two-graphs {*/
+    /*    width: calc((50%) - (10px));*/
+    /*}*/
+
+    .one-of-two-graphs:last-of-type {
+        padding-right: 80px;
+        padding-left: 80px;
+        /*margin-bottom: 0;*/
+    }
+
+    /*.pie-graph {*/
+    /*    margin-top: 70px;*/
+    /*}*/
+
+    /*
+    ---------------------------------- MAP AND DEFINITIONS ----------------------------------------
+    */
+
+    .map {
+        margin-right: 12px;
+        width: calc((50%) - (6px));
+    }
+
+    .map .graph-container {
+        margin-top: 30px;
+    }
+
+    /*
+    .map .graph-container {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    */
+
+    .definitions {
+        width: calc((50%) - (6px));
+    }
+
+    /*
+    ---------------------------------- WHAT TO DO and CORES COMPARISON ----------------------------------------
+    */
+
+    .core-comparison {
+        width: calc((55%) - (6px));
+        order: 1;
+    }
+
+    .to-do {
+        width: calc((45%) - (6px));
+        margin-right: 12px;
+    }
+
+    /*
+    ---------------------------------- FORMULA and REPORT ----------------------------------------
+    */
+
+    .formula {
+        order: 1;
+        margin-right: 12px;
+        width: calc((60%) - (6px));
+    }
+
+    .report {
+        order: 1;
+        width: calc((40%) - (6px));
+    }
+
+    /*
+    ---------------------------------- FOOTER ----------------------------------------
+    */
+
+    .about-us {
+        order: 1;
+        margin-right: 12px;
+        width: calc((33.3%) - (8px));
+    }
+
+    .data-questions {
+        order: 2;
+        margin-right: 12px;
+        width: calc((33.3%) - (8px));
+    }
+
+    .show-stripes {
+        order: 2;
+        width: calc((33.3%) - (8px));
+    }
+
+    .citation {
+        order: 3;
+    }
+}
