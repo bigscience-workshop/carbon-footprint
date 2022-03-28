@@ -7,6 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1RlqS0eLyTgr70FEvGMjrpayVuc5eC3ET
 """
 import os
+from template_list import template_list
 # Commented out IPython magic to ensure Python compatibility.
 # %%capture
 # !pip install tzlocal!=3 # Required to resolve an error with codecarbo. Must be placed before you install codecarbon too
@@ -88,12 +89,12 @@ model = model.to(device)
 # Timestamp when we've loaded the model to make sure we don't count that in emissions
 print(f"Model loaded: {datetime.now()}")
 
-print(f"Begin dataset loading: {datetime.now()}")
-nli_dataset = load_dataset("anli")
-coref_dataset = load_dataset("winograd_wsc", 'wsc285')
-word_sense_dataset = load_dataset("anli")
-sentence_dataset = load_dataset("anli")
-print(f"Dataset loading complete: {datetime.now()}")
+#print(f"Begin dataset loading: {datetime.now()}")
+#nli_dataset = load_dataset("anli")
+#coref_dataset = load_dataset("winograd_wsc", 'wsc285')
+#word_sense_dataset = load_dataset("anli")
+#sentence_dataset = load_dataset("anli")
+#print(f"Dataset loading complete: {datetime.now()}")
 
 def create_batch(query: str, batch_size: int):
   return [query for i in range(batch_size)]
@@ -101,12 +102,12 @@ def create_batch(query: str, batch_size: int):
 def export_emissions_csv(emissions, project_name: str):
   pass
 
-def run_model(query: str, project_name: str):
+def run_model(query: str, dataset_name:str, dataset_config_name:str, project_name: str):
   """ """
   emissions = []
   for batch in [16]:
     queries = create_batch(query, batch)
-    tracker = EmissionsTracker(project_name=f"{project_name}_batch_size_{batch}", measure_power_secs=MEASURE_INTERVAL)
+    tracker = EmissionsTracker(project_name=f"{project_name}_{dataset_name}_{dataset_config_name}_batch_size_{batch}", measure_power_secs=MEASURE_INTERVAL)
     tracker.start()
     for i in range(RUNS):
       for q in queries:
@@ -115,8 +116,10 @@ def run_model(query: str, project_name: str):
     emissions.append(tracker.stop())
   return emissions
 
-query = "Barack Obama nominated Hilary Clinton as his secretary of state on Monday. He chose her because she had foreign affairs experience as a former First Lady. In the previous sentence, decide who 'her' is referring to."
+for (dataset_name, dataset_config_name), template_names in template_list.items():
+    for template in template_names:
+        run_model(template, dataset_name, dataset_config_name, "carbonprompt")
 
-run_model(query, "carbonprompt")
+#query = "Barack Obama nominated Hilary Clinton as his secretary of state on Monday. He chose her because she had foreign affairs experience as a former First Lady. In the previous sentence, decide who 'her' is referring to."
 
 #
