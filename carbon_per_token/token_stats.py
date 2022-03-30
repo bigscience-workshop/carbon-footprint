@@ -3,7 +3,7 @@ import logging
 import random
 import json
 from collections import defaultdict
-
+from datetime import datetime
 from datasets import load_dataset
 from torch.utils.data import DataLoader
 
@@ -74,16 +74,19 @@ def main():
             # raw_datasets = load_dataset(dataset_name, split=dataset_config_name)
             continue
         else:
+            print(f"Download for {dataset_name} started at: {datetime.now()}")
             raw_datasets = load_dataset(dataset_name, dataset_config_name, split="validation")
         column_names = raw_datasets.column_names
         full_dataset_id = (
-            f"{dataset_name}" 
-            if dataset_config_name is None 
+            f"{dataset_name}"
+            if dataset_config_name is None
             else f"{dataset_name}/{dataset_config_name}"
         )
         prompts = DatasetTemplates(full_dataset_id)
+        print(f"{dataset_name} finished downloading & loaded: {datetime.now()}")
 
         # get tokenizer
+        print(f"Grabbing tokenizer for {args.tokenizer_name} at : {datetime.now()}")
         tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name, use_fast=not args.use_slow_tokenizer)
         if tokenizer.pad_token is None:
             for token in [tokenizer.eos_token, tokenizer.bos_token, tokenizer.sep_token]:

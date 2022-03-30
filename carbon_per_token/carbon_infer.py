@@ -16,9 +16,9 @@ from template_list import template_list
 # !pip install sentencepiece # Required to resolve this error: https://github.com/huggingface/transformers/issues/9750
 # # If using colab, restart your runtime after this cell finishes (don't factory reset it)
 
-os.system('sudo apt install sysfsutils')
-
-os.system('sudo chmod -R a+r /sys/class/powercap/intel-rapl')
+# Used to get codecarbon working nicely with colab
+# os.system('sudo apt install sysfsutils')
+# os.system('sudo chmod -R a+r /sys/class/powercap/intel-rapl')
 
 """# Introduction
 
