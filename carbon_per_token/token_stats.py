@@ -2,12 +2,14 @@ import argparse
 import logging
 import random
 import json
+import torch
 from collections import defaultdict
 from datetime import datetime
 from datasets import load_dataset
 from torch.utils.data import DataLoader
+from codecarbon import EmissionsTracker
 
-from transformers import AutoTokenizer, default_data_collator
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, default_data_collator
 from promptsource.templates import DatasetTemplates
 
 # from t-zero
@@ -65,6 +67,8 @@ def main():
     args = parse_args()
     token_counts = defaultdict(int)
     padding = "max_length" if args.pad_to_max_length else False
+    isGpu = torch.cuda.is_available()
+    device = "cuda:0" if isGpu else "cpu"
 
     for (dataset_name, dataset_config_name), template_names in template_list.items():
         
@@ -88,6 +92,10 @@ def main():
         # get tokenizer
         print(f"Grabbing tokenizer for {args.tokenizer_name} at : {datetime.now()}")
         tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name, use_fast=not args.use_slow_tokenizer)
+        print(f" Tokenizer downloaded, grabbing pretrained model for {args.tokenizer_name} at: {datetime.now()}")
+        model = AutoModelForSeq2SeqLM.from_pretrained(args.tokenizer_name)
+        model = model.to(device)
+        
         if tokenizer.pad_token is None:
             for token in [tokenizer.eos_token, tokenizer.bos_token, tokenizer.sep_token]:
                 if token is not None:
@@ -98,6 +106,44 @@ def main():
         for template_name in template_names:
             
             template = prompts[template_name]
+
+            def preprocess_inference(examples):
+                """ A helper function used to """
+                bs = len(examples[column_names[0]])
+
+                input_texts = []
+                target_texts = []
+                answer_choices_texts = []
+                for i in range(bs):
+                    ex = {
+                        k: examples[k][i]
+                        for k in column_names
+                    }
+                    input, target = template.apply(ex)
+                    ex_answer_choices = template.get_answer_choices_list(ex)
+                    assert target in ex_answer_choices
+                    input_texts.append(input)
+                    target_texts.append(target)
+                    answer_choices_texts.append(ex_answer_choices)
+
+                tokenized_inputs = tokenizer(
+                    input_texts,
+                    padding=padding,
+                    max_length=args.max_length,
+                    truncation=True,
+                    add_special_tokens=False,
+                )
+                tokenized_targets = [
+                    tokenizer(
+                        ans_choi,
+                        padding=True,
+                        max_length=args.target_max_length,
+                        truncation=True,
+                    )
+                    for ans_choi in answer_choices_texts
+                ]
+
+                return [tokenized_inputs, tokenized_targets]
 
             def preprocess_function(examples):
                 bs = len(examples[column_names[0]])

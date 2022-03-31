@@ -13,10 +13,12 @@ Code was written using Python 3.7
 
 Windows:
 ```sh
-py -3.7 -m venv venv 
+py -3.7 -m venv venv
+. .\venv\Scripts\activate
 ```
 
 Linux:
 ```sh
-py -3.7 -m venv venv 
+virtualenv venv -p `which python3.7`
+source venv/bin/activate
 ``` 
