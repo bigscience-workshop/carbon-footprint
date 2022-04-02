@@ -3,6 +3,7 @@ import logging
 import random
 import json
 import torch
+import pprint
 from collections import defaultdict
 from datetime import datetime
 from datasets import load_dataset
@@ -69,13 +70,18 @@ def main():
     padding = "max_length" if args.pad_to_max_length else False
     isGpu = torch.cuda.is_available()
     device = "cuda:0" if isGpu else "cpu"
+    MEASURE_INTERVAL = 1
+    USE_CODECARBON = True
 
     for (dataset_name, dataset_config_name), template_names in template_list.items():
         
         # download dataset
         # NOTE: anli doesn't work, and story_cloze requires manual download, skipping for now
-        if dataset_name == "anli" or dataset_name == "story_cloze":
+        # TODO: I'm skipping other datasets for now just for rapid testing
+        if dataset_name == "anli" or dataset_name == "story_cloze" or dataset_name == "hellaswag" or dataset_name == "winogrande":
             # raw_datasets = load_dataset(dataset_name, split=dataset_config_name)
+            continue
+        elif dataset_name == "super_glue" and (dataset_config_name == "rte" or dataset_config_name == "cb" or dataset_config_name == "wic" or dataset_config_name == "copa"):
             continue
         else:
             print(f"Download for {dataset_name} started at: {datetime.now()}")
@@ -106,44 +112,6 @@ def main():
         for template_name in template_names:
             
             template = prompts[template_name]
-
-            def preprocess_inference(examples):
-                """ A helper function used to """
-                bs = len(examples[column_names[0]])
-
-                input_texts = []
-                target_texts = []
-                answer_choices_texts = []
-                for i in range(bs):
-                    ex = {
-                        k: examples[k][i]
-                        for k in column_names
-                    }
-                    input, target = template.apply(ex)
-                    ex_answer_choices = template.get_answer_choices_list(ex)
-                    assert target in ex_answer_choices
-                    input_texts.append(input)
-                    target_texts.append(target)
-                    answer_choices_texts.append(ex_answer_choices)
-
-                tokenized_inputs = tokenizer(
-                    input_texts,
-                    padding=padding,
-                    max_length=args.max_length,
-                    truncation=True,
-                    add_special_tokens=False,
-                )
-                tokenized_targets = [
-                    tokenizer(
-                        ans_choi,
-                        padding=True,
-                        max_length=args.target_max_length,
-                        truncation=True,
-                    )
-                    for ans_choi in answer_choices_texts
-                ]
-
-                return [tokenized_inputs, tokenized_targets]
 
             def preprocess_function(examples):
                 bs = len(examples[column_names[0]])
@@ -229,11 +197,16 @@ def main():
 
             eval_dataloader = DataLoader(eval_dataset, collate_fn=data_collator, batch_size=args.per_device_eval_batch_size)
 
+            if USE_CODECARBON:
+                tracker = EmissionsTracker(project_name=f"{device}_{dataset_name}_{dataset_config_name}", measure_power_secs=MEASURE_INTERVAL)
+                tracker.start()
+
             for line in eval_dataloader:
+                outputs = model.generate(line["input_ids"])
                 token_counts[full_dataset_id] += len(line["input_ids"])
-    
-    with open("token_counts.json", "w") as f:
-        f.write(json.dumps(dict(token_counts)))
+
+            if USE_CODECARBON:
+                tracker.stop()
 
 if __name__ == "__main__":
     main()
