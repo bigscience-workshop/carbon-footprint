@@ -5,3 +5,4 @@ promptsource==0.1.0
 sentencepiece
 codecarbon
 streamlit
+pandas

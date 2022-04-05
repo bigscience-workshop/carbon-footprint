@@ -3,12 +3,12 @@ import logging
 import random
 import json
 import torch
-import pprint
+import pandas as pd
 from collections import defaultdict
 from datetime import datetime
 from datasets import load_dataset
 from torch.utils.data import DataLoader
-from codecarbon import EmissionsTracker
+from pprint import pprint
 
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, default_data_collator
 from promptsource.templates import DatasetTemplates
@@ -59,6 +59,12 @@ def parse_args():
         default=1,
         help="Batch size (per device) for the evaluation dataloader.",
     )
+    parser.add_argument(
+        "--use_codecarbon",
+        type=bool,
+        default=True,
+        help="Batch size (per device) for the evaluation dataloader.",
+    )
     args = parser.parse_args()
 
     return args
@@ -68,10 +74,17 @@ def main():
     args = parse_args()
     token_counts = defaultdict(int)
     padding = "max_length" if args.pad_to_max_length else False
+
+    # It is important we know the device we're running.
     isGpu = torch.cuda.is_available()
     device = "cuda:0" if isGpu else "cpu"
+
+
+    # Variables used for codecarbon 
     MEASURE_INTERVAL = 1
-    USE_CODECARBON = True
+    USE_CODECARBON = args.use_codecarbon
+    if USE_CODECARBON:
+        from codecarbon import EmissionsTracker
 
     for (dataset_name, dataset_config_name), template_names in template_list.items():
         
@@ -205,8 +218,12 @@ def main():
                 outputs = model.generate(line["input_ids"])
                 token_counts[full_dataset_id] += len(line["input_ids"])
 
+            pprint(token_counts)
+
             if USE_CODECARBON:
                 tracker.stop()
+            
+
 
 if __name__ == "__main__":
     main()
