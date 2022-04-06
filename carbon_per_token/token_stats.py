@@ -212,17 +212,28 @@ def main():
 
             if USE_CODECARBON:
                 tracker = EmissionsTracker(project_name=f"{device}_{dataset_name}_{dataset_config_name}", measure_power_secs=MEASURE_INTERVAL)
-                tracker.start()
 
+            token_count_per_line = []
             for line in eval_dataloader:
+                if USE_CODECARBON:
+                    tracker.start()
+
                 outputs = model.generate(line["input_ids"])
-                token_counts[full_dataset_id] += len(line["input_ids"])
 
-            pprint(token_counts)
+                if USE_CODECARBON:
+                    tracker.stop()
 
+                token_count_per_line.append(len(line["input_ids"]))
+
+            # TODO: Emissions per token
+            # If using code carbon, copy the emissions.csv and append a new column that includes the token counts
+            # Then save it as a new CSV
+            # If we're not using codecarbon, just save the token count to a csv + maybe additional info?
             if USE_CODECARBON:
-                tracker.stop()
-            
+                emissions = pd.read_csv('./emissions.csv', encoding='UTF-8')
+            else:
+                pass
+
 
 
 if __name__ == "__main__":
