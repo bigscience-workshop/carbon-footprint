@@ -71,7 +71,7 @@ def main(args):
     dataset = prepare_dataset(tokenizer, args.dataset_name, args.dataset_config, block_size=args.block_size)
     # TODO: check if `shuffle` should be `True`
     dataloader = DataLoader(dataset["train"], batch_size=args.batch_size, shuffle=False, collate_fn=default_data_collator)
-    pretrained_flag = "pretrained" if args.pretrained else "random"
+    pretrained_flag = "pretrained" if args.from_pretrained else "random"
     project_name = f"{args.model_name}_{pretrained_flag}_{args.dataset_name}_{args.batch_size}"
     tracker = EmissionsTracker(project_name=project_name, log_level="error")
     for _ in range(args.num_trials):
