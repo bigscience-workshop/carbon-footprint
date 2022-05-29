@@ -19,6 +19,7 @@ def main():
     for key, value in result.items():
         sns.histplot(value, bins=100)
         plt.savefig(os.path.join("figures", f"{key}.png"))
+        plt.close()
         print(key, np.mean(value), np.std(value), len(value))
 
 
