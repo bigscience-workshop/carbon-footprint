@@ -13,6 +13,7 @@ class GpuType(Enum):
     V100_32GB = auto()
     V100_16GB = auto()
     A100_40GB = auto()
+    A100_80GB = auto()
 
 class Node:
     def __init__(self, gpu_type, num_gpus):
@@ -22,7 +23,8 @@ class Node:
 type2partitions = [(Node(GpuType.V100_32GB, 4), 'gpu_p1'),
                    (Node(GpuType.V100_32GB, 8), 'gpu_p2'),
                    (Node(GpuType.V100_16GB, 4), 'gpu_p3'),
-                   (Node(GpuType.A100_40GB, 8), 'gpu_p4')]
+                   (Node(GpuType.A100_40GB, 8), 'gpu_p4'),
+                   (Node(GpuType.A100_80GB, 8), 'gpu_p5')]
 
 node2type = {}
 for node_type, partition in type2partitions:
@@ -80,13 +82,13 @@ p = subprocess.run(' '.join(args), shell=True, encoding='utf8',
 
 if show_headers:
     # Print human-readable output
-    fmt_string = '{0:<9} {1:<9} {2:<9} {3:<9} {4:<9} {5:<9} {6:<9} {7:<9} {8:<9} {9:<9} {10:<10} {11:<10} {12:<19} {13:<19} {14:<19}'
-    print(fmt_string.format('JobID', 'V100 32GB', 'V100 16GB', 'A100 40GB', 'CPUs', 'RAM', 'Energy', 'Partition', 'Group', 'Elapsed', 'QoS', 'JobName', 'Start', 'End', 'Workdir'))
-    print(('-' * 9 + ' ') * 10 + ('-' * 10 + ' ') * 2 + ('-' * 19 + ' ') * 2 + ('-' * 40 + ' '))
+    fmt_string = '{0:<9} {1:<9} {2:<9} {3:<9} {4:<9} {5:<9} {6:<9} {7:<9} {8:<9} {9:<9} {10:<9} {11:<10} {12:<10} {13:<19} {14:<19} {15:<19}'
+    print(fmt_string.format('JobID', 'V100 32GB', 'V100 16GB', 'A100 40GB', 'A100 80GB', 'CPUs', 'RAM', 'Energy', 'Partition', 'Group', 'Elapsed', 'QoS', 'JobName', 'Start', 'End', 'Workdir'))
+    print(('-' * 9 + ' ') * 11 + ('-' * 10 + ' ') * 2 + ('-' * 19 + ' ') * 2 + ('-' * 40 + ' '))
 
 else:
     # Machine readable output
-    fmt_string = '{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}'
+    fmt_string = '{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}'
 
 for j in p.stdout.splitlines():
     job_id, elapsed, nodelist, alloctres, partition, qos, start, end, group, jobname, workdir = j.split(
@@ -105,6 +107,7 @@ for j in p.stdout.splitlines():
                           num_gpus_per_types[GpuType.V100_32GB],
                           num_gpus_per_types[GpuType.V100_16GB],
                           num_gpus_per_types[GpuType.A100_40GB],
+                          num_gpus_per_types[GpuType.A100_80GB],
                           alloc['cpu'],
                           alloc['mem'], 
                           alloc['energy'],
