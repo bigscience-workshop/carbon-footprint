@@ -87,13 +87,13 @@ p = subprocess.run(' '.join(args), shell=True, encoding='utf8',
 
 if show_headers:
     # Print human-readable output
-    fmt_string = '{0:<9} {1:<9} {2:<9} {3:<9} {4:<9} {5:<9} {6:<9} {7:<9} {8:<9} {9:<9} {10:<9} {11:<10} {12:<10} {13:<19} {14:<19} {15:<19}'
-    print(fmt_string.format('JobID', 'V100 32GB', 'V100 16GB', 'A100 40GB', 'A100 80GB', 'CPUs', 'RAM', 'Energy', 'Partition', 'Group', 'Elapsed', 'QoS', 'JobName', 'Start', 'End', 'Workdir'))
+    fmt_string = '{0:<9} {1:<9} {2:<9} {3:<9} {4:<9} {5:<9} {6:<9} {7:<9} {8:<9} {9:<9} {10:<9} {11:<10} {12:<10} {13:<19} {14:<19} {15:<19} {16:<19}'
+    print(fmt_string.format('JobID', 'V100 32GB', 'V100 16GB', 'A100 40GB', 'A100 80GB', 'CPUs', 'RAM', 'Energy', 'Partition', 'Group', 'Elapsed', 'QoS', 'JobName', 'Start', 'End', 'Workdir', 'Account'))
     print(('-' * 9 + ' ') * 11 + ('-' * 10 + ' ') * 2 + ('-' * 19 + ' ') * 2 + ('-' * 40 + ' '))
 
 else:
     # Machine readable output
-    fmt_string = '{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}'
+    fmt_string = '{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}'
 
 for j in p.stdout.splitlines():
     job_id, elapsed, nodelist, alloctres, partition, qos, start, end, group, jobname, workdir, account = j.split(
@@ -127,4 +127,5 @@ for j in p.stdout.splitlines():
                           jobname,
                           start,
                           end,
-                          workdir))
+                          workdir,
+                          account))
