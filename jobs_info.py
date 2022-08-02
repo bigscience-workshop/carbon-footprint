@@ -99,8 +99,8 @@ for j in p.stdout.splitlines():
     job_id, elapsed, nodelist, alloctres, partition, qos, start, end, group, jobname, workdir, account = j.split(
         '|')
     
-    # Filtering only bigscience project
-    if account[:3] != "six":
+    # Filtering only bigscience projects
+    if account[:3] != "six" and account[:3] != "ajs":
         continue
 
     num_gpus_per_types = find_num_gpus_per_types(nodelist, alloctres)
