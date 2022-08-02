@@ -8,6 +8,7 @@ import subprocess
 import collections
 import re
 from enum import Enum, auto
+from functools import lru_cache
 
 class GpuType(Enum):
     V100_32GB = auto()
@@ -41,12 +42,16 @@ def find_node_type(node):
     except:
         return None
 
-
-def find_num_gpus_per_types(nodelist, alloctres):
+@lru_cache(None)
+def get_nodes(nodelist):
     p = subprocess.run(f'/gpfslocalsys/slurm/current/bin/scontrol show hostnames {nodelist}',
                        shell=True, encoding='utf8',
                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    nodes = p.stdout.splitlines()
+    return p.stdout.splitlines()
+
+
+def find_num_gpus_per_types(nodelist, alloctres):
+    nodes = get_nodes(nodelist)
     is_single_node = (len(nodes) == 1)
 
     if is_single_node:
@@ -75,7 +80,7 @@ def split_alloctres(alloctres):
 
 
 show_headers = not ('-n' in sys.argv[1:] or '--noheader' in sys.argv[1:])
-args = ['sacct'] + sys.argv[1:] + ['--format=jobid,elapsed,nodelist,alloctres,partition,qos,start,end,group,jobname,workdir', '-P', '-X', '-n']
+args = ['sacct'] + sys.argv[1:] + ['--format=jobid,elapsed,nodelist,alloctres,partition,qos,start,end,group,jobname,workdir,account', '-P', '-X', '-n']
 
 p = subprocess.run(' '.join(args), shell=True, encoding='utf8',
                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -91,8 +96,12 @@ else:
     fmt_string = '{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}'
 
 for j in p.stdout.splitlines():
-    job_id, elapsed, nodelist, alloctres, partition, qos, start, end, group, jobname, workdir = j.split(
+    job_id, elapsed, nodelist, alloctres, partition, qos, start, end, group, jobname, workdir, account = j.split(
         '|')
+    
+    # Filtering only bigscience project
+    if account[:3] != "six":
+        continue
 
     num_gpus_per_types = find_num_gpus_per_types(nodelist, alloctres)
 
