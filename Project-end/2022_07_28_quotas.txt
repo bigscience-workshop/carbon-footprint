@@ -1,0 +1,141 @@
+Derniere mise a jour le 28-07-2022 08:00:02
+
+################################################################################
+                           PROJET 101860 SUR JEAN-ZAY
+################################################################################
+
+================================================================================
+ CPU (du 01-05-2021 au 30-04-2022)                   Allocation : 2000000 h.cpu
+================================================================================
+
+  Compte   Proprietaire                    Consommation Nb travaux Remboursement
+  -------- ------------------------------ ------------- ---------- -------------
+  uty16tp  WANG_Thomas                        173435.26      36148             -
+  uue59kq  SAULNIER_Lucile                     56558.76      36658             -
+  urd43gx  LAURENCON_Hugo                      29379.18       2047             -
+  uhk85as  LE_SCAO_Teven                       27562.40        899             -
+  ulz63oj  CASTAGNE_Roman                       5523.13         39             -
+  uul91hs  SANH_Victor                          1736.01       6969             -
+  unm25jp  COLOMBO_Pierre                        891.42        980             -
+  ura81os  BEKMAN_Stas                           657.42      28160             -
+  uuc43gc  LAUNAY_Julien                         214.50       2212             -
+  uiz98zp  THOMAS_Wolf                            12.19          5             -
+  uuz42mu  VIGUIER_Sylvain                         0.06          3             -
+  uvb76qa  BELTAGY_Islam                              -          -             -
+  ugo23cf  LAGUNAS_Francois                           -          -             -
+  ucy39hi  ROMAC_Clement                              -          -             -
+  uan68tv  YOUNES_Belkada                             -          -             -
+  utw68ny  HESSLOW_Daniel                             -          -             -
+  unj46ad  MUENNIGHOFF_Niklas                         -          -             -
+  -------- ------------------------------ ------------- ---------- -------------
+                                   Totaux     295970.33     114120          0.00
+                              Utilisation        14.80%           
+
+================================================================================
+ V100 (du 01-05-2021 au 30-04-2022)                  Allocation : 2500000 h.gpu
+================================================================================
+
+  Compte   Proprietaire                    Consommation Nb travaux Remboursement
+  -------- ------------------------------ ------------- ---------- -------------
+  ura81os  BEKMAN_Stas                       1239160.15       2981             -
+  uhk85as  LE_SCAO_Teven                      437175.95        995             -
+  uul91hs  SANH_Victor                        134523.42      18819             -
+  uty16tp  WANG_Thomas                         97557.07       5075             -
+  uue59kq  SAULNIER_Lucile                     53231.32        575             -
+  urd43gx  LAURENCON_Hugo                      38136.93         43             -
+  ulz63oj  CASTAGNE_Roman                       6441.04         11             -
+  unm25jp  COLOMBO_Pierre                        827.96       3046             -
+  uuz42mu  VIGUIER_Sylvain                         3.18         23             -
+  unj46ad  MUENNIGHOFF_Niklas                      0.53          5             -
+  uan68tv  YOUNES_Belkada                             -          -             -
+  ucy39hi  ROMAC_Clement                              -          -             -
+  ugo23cf  LAGUNAS_Francois                           -          -             -
+  uvb76qa  BELTAGY_Islam                              -          -             -
+  uiz98zp  THOMAS_Wolf                             0.00          3             -
+  uuc43gc  LAUNAY_Julien                              -          -             -
+  utw68ny  HESSLOW_Daniel                             -          -             -
+  -------- ------------------------------ ------------- ---------- -------------
+                                   Totaux    2007057.55      31576          0.00
+                              Utilisation        80.28%           
+
+================================================================================
+ A100 (du 01-02-2022 au 15-09-2022)                  Allocation : 1500000 h.gpu
+================================================================================
+
+  Compte   Proprietaire                    Consommation Nb travaux Remboursement
+  -------- ------------------------------ ------------- ---------- -------------
+  ura81os  BEKMAN_Stas                        987039.21       1162             -
+  uty16tp  WANG_Thomas                        185396.81       1476             -
+  unj46ad  MUENNIGHOFF_Niklas                  77506.77       4176             -
+  uan68tv  YOUNES_Belkada                        898.09        480             -
+  uhk85as  LE_SCAO_Teven                         192.38          8             -
+  uue59kq  SAULNIER_Lucile                        30.18         14             -
+  uiz98zp  THOMAS_Wolf                             4.28          1             -
+  utw68ny  HESSLOW_Daniel                          1.08          5             -
+  ucy39hi  ROMAC_Clement                              -          -             -
+  uuz42mu  VIGUIER_Sylvain                            -          -             -
+  urd43gx  LAURENCON_Hugo                             -          -             -
+  ugo23cf  LAGUNAS_Francois                           -          -             -
+  uvb76qa  BELTAGY_Islam                              -          -             -
+  ulz63oj  CASTAGNE_Roman                             -          -             -
+  unm25jp  COLOMBO_Pierre                             -          -             -
+  uul91hs  SANH_Victor                                -          -             -
+  uuc43gc  LAUNAY_Julien                              -          -             -
+  -------- ------------------------------ ------------- ---------- -------------
+                                   Totaux    1251068.80       7322          0.00
+                              Utilisation        83.40%           
+
+================================================================================
+ V100 (du 25-05-2022 au 15-09-2022)                    Allocation : 70000 h.gpu
+================================================================================
+
+  Compte   Proprietaire                    Consommation Nb travaux Remboursement
+  -------- ------------------------------ ------------- ---------- -------------
+  unj46ad  MUENNIGHOFF_Niklas                  54413.53       1062             -
+  uhk85as  LE_SCAO_Teven                        4979.64       3353             -
+  ulz63oj  CASTAGNE_Roman                       1273.53          2             -
+  uty16tp  WANG_Thomas                            18.77         39             -
+  utw68ny  HESSLOW_Daniel                             -          -             -
+  uuc43gc  LAUNAY_Julien                              -          -             -
+  ura81os  BEKMAN_Stas                                -          -             -
+  uul91hs  SANH_Victor                                -          -             -
+  unm25jp  COLOMBO_Pierre                             -          -             -
+  uiz98zp  THOMAS_Wolf                                -          -             -
+  uvb76qa  BELTAGY_Islam                              -          -             -
+  ugo23cf  LAGUNAS_Francois                           -          -             -
+  uue59kq  SAULNIER_Lucile                            -          -             -
+  uuz42mu  VIGUIER_Sylvain                            -          -             -
+  urd43gx  LAURENCON_Hugo                             -          -             -
+  uan68tv  YOUNES_Belkada                             -          -             -
+  ucy39hi  ROMAC_Clement                              -          -             -
+  -------- ------------------------------ ------------- ---------- -------------
+                                   Totaux      60685.47       4456          0.00
+                              Utilisation        86.69%           
+
+================================================================================
+ CPU (du 25-05-2022 au 15-09-2022)                    Allocation : 200000 h.cpu
+================================================================================
+
+  Compte   Proprietaire                    Consommation Nb travaux Remboursement
+  -------- ------------------------------ ------------- ---------- -------------
+  uhk85as  LE_SCAO_Teven                       36876.19       5260             -
+  unm25jp  COLOMBO_Pierre                       6155.73        415             -
+  ulz63oj  CASTAGNE_Roman                       5304.66         35             -
+  unj46ad  MUENNIGHOFF_Niklas                    497.80        162             -
+  ura81os  BEKMAN_Stas                           355.37       1597             -
+  uul91hs  SANH_Victor                           108.37       2413             -
+  urd43gx  LAURENCON_Hugo                         93.92         27             -
+  utw68ny  HESSLOW_Daniel                             -          -             -
+  uuc43gc  LAUNAY_Julien                              -          -             -
+  uiz98zp  THOMAS_Wolf                                -          -             -
+  uvb76qa  BELTAGY_Islam                              -          -             -
+  uue59kq  SAULNIER_Lucile                         0.00       1002             -
+  ugo23cf  LAGUNAS_Francois                           -          -             -
+  uuz42mu  VIGUIER_Sylvain                            -          -             -
+  ucy39hi  ROMAC_Clement                              -          -             -
+  uty16tp  WANG_Thomas                             0.00       2140             -
+  uan68tv  YOUNES_Belkada                          0.00         57             -
+  -------- ------------------------------ ------------- ---------- -------------
+                                   Totaux      49392.04      13108          0.00
+                              Utilisation        24.70%           
+

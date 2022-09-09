@@ -1,0 +1,5 @@
+1869367|0|0|0|4|20|75000M|N/A|gpu_p5|genive01|00:07:47|qos_gpu-t3|bash|2022-05-14T17:50:27|2022-05-14T17:58:14|/gpfsdswork/projects/rech/bbv/utw68ny/big_sci/Megatron-DeepSpeed|six@a100
+1869473|0|0|0|4|20|75000M|N/A|gpu_p5|genive01|00:01:55|qos_gpu-t3|bash|2022-05-14T18:01:30|2022-05-14T18:03:25|/gpfsdswork/projects/rech/bbv/utw68ny/big_sci/deepspeed-big-science|six@a100
+1869636|0|0|0|1|20|75000M|N/A|gpu_p5|genive01|00:06:44|qos_gpu-t3|bash|2022-05-14T18:12:22|2022-05-14T18:19:06|/gpfsdswork/projects/rech/bbv/utw68ny/big_sci/apex|six@a100
+1869734|0|0|0|2|20|75000M|N/A|gpu_p5|genive01|00:03:15|qos_gpu-t3|bash|2022-05-14T18:19:58|2022-05-14T18:23:13|/gpfsdswork/projects/rech/bbv/utw68ny/big_sci/apex|six@a100
+1870043|0|0|0|2|20|75000M|N/A|gpu_p5|genive01|00:05:39|qos_gpu-t3|bash|2022-05-14T18:41:05|2022-05-14T18:46:44|/gpfsssd/worksf/projects/rech/six/commun/code/deepspeed|six@a100
