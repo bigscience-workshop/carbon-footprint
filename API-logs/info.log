@@ -1,0 +1,21 @@
+CodeCarbon is going in an infinite loop to monitor this machine.
+[codecarbon INFO @ 15:11:49] [setup] RAM Tracking...
+[codecarbon INFO @ 15:11:49] [setup] GPU Tracking...
+[codecarbon INFO @ 15:11:49] Tracking Nvidia GPU via pynvml
+[codecarbon INFO @ 15:11:50] [setup] CPU Tracking...
+[codecarbon WARNING @ 15:11:50] No CPU tracking mode found. Falling back on CPU constant mode.
+[codecarbon WARNING @ 15:11:51] We saw that you have a Intel(R) Xeon(R) CPU @ 2.20GHz but we don't know it. Please contact us.
+[codecarbon INFO @ 15:11:51] CPU Model on constant consumption mode: Intel(R) Xeon(R) CPU @ 2.20GHz
+[codecarbon INFO @ 15:11:52] >>> Tracker's metadata:
+[codecarbon INFO @ 15:11:52]   Platform system: Linux-5.10.0-17-cloud-amd64-x86_64-with-glibc2.31
+[codecarbon INFO @ 15:11:52]   Python version: 3.10.6
+[codecarbon INFO @ 15:11:52]   Available RAM : 1338.633 GB
+[codecarbon INFO @ 15:11:52]   CPU count: 96
+[codecarbon INFO @ 15:11:52]   CPU model: Intel(R) Xeon(R) CPU @ 2.20GHz
+[codecarbon INFO @ 15:11:52]   GPU count: 16
+[codecarbon INFO @ 15:11:52]   GPU model: 16 x NVIDIA A100-SXM4-40GB
+[codecarbon ERROR @ 15:11:52] type NoneType doesn't define __round__ method
+Traceback (most recent call last):
+  File "/home/nicolas_huggingface_co/.pyenv/versions/3.10.6/lib/python3.10/site-packages/codecarbon/core/api_client.py", line 122, in _create_run
+    longitude=round(self.conf.get("longitude"), 1),
+TypeError: type NoneType doesn't define __round__ method
